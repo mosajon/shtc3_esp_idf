@@ -1,6 +1,8 @@
 #ifndef __SHTC3_H__
 #define __SHTC3_H__
 
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
 #include "driver/i2c.h"
 #include "driver/gpio.h"
 #include "esp_err.h"
@@ -19,7 +21,7 @@
 #define T_FIRST_LP 0x609C
 #define RH_FIRST_LP 0x401A
 
-#define I2C_MASTER_FREQ_100KHZ 100000
+#define CLK_STRETCH_TICK 300
 
 void init_sensor(i2c_mode_t mode, gpio_num_t sda, gpio_num_t scl, uint32_t freq);
 esp_err_t wakeup_sensor(uint8_t addr);

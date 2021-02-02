@@ -10,7 +10,7 @@ const char *TAG = "MAIN";
 
 void app_main(void)
 {   
-    init_sensor(I2C_MODE_MASTER, 21, 22, I2C_MASTER_FREQ_100KHZ);
+    init_sensor(I2C_MODE_MASTER, 4, 5, CLK_STRETCH_TICK);
 
     while (1)
     {
@@ -18,7 +18,7 @@ void app_main(void)
         float temperature =0, humidity =0;
         read_out(SENSOR_ADDR, T_FIRST_N, &temperature, &humidity);
         sleep_sensor(SENSOR_ADDR);
-        ESP_LOGI(TAG, "Temperature: %f, Humidade: %f", temperature, humidity);
+        ESP_LOGI(TAG, "Temperature: %.2f, Humidity: %.2f", temperature, humidity);
         vTaskDelay(2000 / portTICK_PERIOD_MS);
     }
 }

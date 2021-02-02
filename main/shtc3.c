@@ -7,19 +7,16 @@ void init_sensor(i2c_mode_t mode, gpio_num_t sda, gpio_num_t scl, uint32_t freq)
 {
     i2c_config_t conf;
     conf.mode = I2C_MODE_MASTER;
-    conf.sda_io_num = GPIO_NUM_21;
-    conf.scl_io_num = GPIO_NUM_22;
+    conf.sda_io_num = GPIO_NUM_4;
+    conf.scl_io_num = GPIO_NUM_5;
 
     conf.sda_pullup_en = GPIO_PULLUP_ENABLE;
     conf.scl_pullup_en = GPIO_PULLUP_ENABLE;
 
-    conf.master.clk_speed = freq;
+    conf.clk_stretch_tick = CLK_STRETCH_TICK;
 
+    i2c_driver_install(I2C_NUM_0, conf.mode);
     i2c_param_config(I2C_NUM_0, &conf);
-    i2c_driver_install(I2C_NUM_0, conf.mode,
-                       0,
-                       0,
-                       0);
 }
 
 esp_err_t wakeup_sensor(uint8_t addr)
