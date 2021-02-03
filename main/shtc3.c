@@ -13,7 +13,7 @@ void init_sensor(i2c_mode_t mode, gpio_num_t sda, gpio_num_t scl, uint32_t freq)
     conf.sda_pullup_en = GPIO_PULLUP_ENABLE;
     conf.scl_pullup_en = GPIO_PULLUP_ENABLE;
 
-    conf.clk_stretch_tick = CLK_STRETCH_TICK;
+    conf.clk_stretch_tick = freq;
 
     i2c_driver_install(I2C_NUM_0, conf.mode);
     i2c_param_config(I2C_NUM_0, &conf);
